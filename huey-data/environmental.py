@@ -2,7 +2,9 @@
 
 import Adafruit_DHT
 import datetime
+import pytz
 
+utc = pytz.timezone('UTC')
 # Sensor should be set to Adafruit_DHT.DHT11,
 # Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
 sensors = dict(
@@ -44,7 +46,7 @@ def get_temp_humidity():
             data = dict(
                 measurement='environment',
                 tags=dict(sensor_id=sensor_id),
-                time=datetime.datetime.now(tz='UTC'),
+                time=datetime.datetime.now(tz=utc),
                 fields=dict(
                     temperature=temperature,
                     humidity=humidity,

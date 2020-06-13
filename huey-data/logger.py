@@ -1,7 +1,7 @@
 from influxdb import InfluxDBClient
 import time
-from .environmental import get_temp_humidity
-from .settings import *
+from environmental import get_temp_humidity
+from settings import *
 
 
 def write_to_db(table, data):
@@ -16,4 +16,4 @@ while True:
     env_data = get_temp_humidity()
     client.write_points(env_data)
 
-    time.sleep(300)
+    time.sleep(LOGGER_TIMESTEP)
