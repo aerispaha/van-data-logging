@@ -3,6 +3,7 @@
 import Adafruit_DHT
 import datetime
 import pytz
+import logging
 
 utc = pytz.timezone('UTC')
 # Sensor should be set to Adafruit_DHT.DHT11,
@@ -53,9 +54,9 @@ def get_temp_humidity():
                 )
             )
             json_body.append(data)
-            print('Temp={0:0.2f}*C Humidity={1:0.2f}% {2}'.format(temperature, humidity, sensor_id))
+            logging.info('Temp={0:0.2f}*C Humidity={1:0.2f}% {2}'.format(temperature, humidity, sensor_id))
         else:
-            print('Failed to get reading')
+            logging.error('Failed to get reading')
 
     return json_body
 
