@@ -1,38 +1,21 @@
-from datetime import datetime
 import unittest
-import pandas as pd
-from influxdb import DataFrameClient, InfluxDBClient
-from influxdb.exceptions import InfluxDBClientError
-# from .logger import write_to_db
-from .settings import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, TEST_DB_NAME, DB_PROTOCOL, DB_PORT
+from influxdb import InfluxDBClient
+from huey.settings import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, TEST_DB_NAME, DB_PROTOCOL, DB_PORT
 
 
 class LoggerTestCase(unittest.TestCase):
     def setUp(self):
 
         # Connect to the influx client
-        self.client_df = DataFrameClient(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, TEST_DB_NAME)
         self.client = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, TEST_DB_NAME)
 
         # create database
-        self.client_df.create_database(TEST_DB_NAME)
+        self.client.create_database(TEST_DB_NAME)
 
     def tearDown(self):
         # drop test database
-        self.client_df.drop_database(TEST_DB_NAME)
-        self.client_df.close()
-
-    def test_write_dataframe(self):
-        df = pd.DataFrame(data=list(range(30)),
-                          index=pd.date_range(start='2014-11-16',
-                                              periods=30, freq='H', tz='UTC'), columns=['demo'])
-
-        assert self.client_df.write_points(df, 'demo', protocol=DB_PROTOCOL)
-
-        df1 = self.client_df.query(f"select * from demo")
-        print(f'queried data:\n{df.head()}')
-        print(f'queried data:\n{df1["demo"].head()}')
-        assert df.equals(df1["demo"])
+        self.client.drop_database(TEST_DB_NAME)
+        self.client.close()
 
     def test_write_data(self):
 

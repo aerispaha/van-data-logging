@@ -1,4 +1,4 @@
-from local_settings import *
+from huey.local_settings import *
 DB_PORT = 8086
 
 # seconds between measurements

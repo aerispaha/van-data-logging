@@ -1,14 +1,17 @@
 from influxdb import InfluxDBClient
 import time
-from environmental import get_temp_humidity
-from settings import *
+from huey.environmental import get_temp_humidity
+from huey.settings import *
 import logging
 import socket
 
-logging.basicConfig(filename='huey.log', filemode='a', level=logging.DEBUG)
+logging.basicConfig(
+    filename='huey.log',
+    filemode='a',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
-
-logging.info('started logger.py')
 
 def internet(host="8.8.8.8", port=53, timeout=3):
     """
@@ -22,13 +25,13 @@ def internet(host="8.8.8.8", port=53, timeout=3):
         logging.info('connected to internet')
         return True
     except socket.error as ex:
-        print(ex)
+        logging.error('not connected to internet: ', ex)
         return False
 
 
 # first wait until we're connected to internet
 while not internet():
-    logging.info('not connected to internet')
+    pass
 
 
 while True:
