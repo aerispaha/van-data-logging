@@ -1,7 +1,7 @@
 from influxdb import InfluxDBClient
 import time
-from huey.environmental import get_temp_humidity
-from huey.settings import *
+from environmental import get_temp_humidity
+from settings import *
 import logging
 import socket
 
@@ -9,6 +9,7 @@ logging.basicConfig(
     filename='huey.log',
     filemode='a',
     level=logging.INFO,
+    format='%(asctime)s %(levelname)-8s %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
