@@ -10,7 +10,8 @@ utc = pytz.timezone('UTC')
 # Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
 sensors = dict(
     A=(Adafruit_DHT.AM2302, 17),
-    B=(Adafruit_DHT.DHT22, 4),
+    # B=(Adafruit_DHT.DHT22, 4),
+    C=(Adafruit_DHT.DHT11, 22),
 )
 
 
@@ -56,7 +57,7 @@ def get_temp_humidity():
             json_body.append(data)
             logging.info('Temp={0:0.2f}*C Humidity={1:0.2f}% {2}'.format(temperature, humidity, sensor_id))
         else:
-            logging.error('Failed to get reading')
+            logging.error('Failed to get reading from {}'.format(sensor_id))
 
     return json_body
 

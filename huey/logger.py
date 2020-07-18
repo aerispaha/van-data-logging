@@ -6,7 +6,7 @@ import logging
 import socket
 
 logging.basicConfig(
-    filename='huey.log',
+    filename='/home/pi/projects/van-data-logging/huey/huey.log',
     filemode='a',
     level=logging.INFO,
     format='%(asctime)s %(levelname)-8s %(message)s',
