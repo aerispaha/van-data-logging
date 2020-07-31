@@ -34,17 +34,24 @@ def internet(host="8.8.8.8", port=53, timeout=3):
 while not internet():
     pass
 
+# create list to hold environmental data
+env_data = []
 
 while True:
     try:
+        # gather data
+        env_data.extend(get_temp_humidity())
+        logging.debug('env_data length: {}'.format(len(env_data)))
+
         # open client
         client = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
-
-        # gather data
-        env_data = get_temp_humidity()
         client.write_points(env_data)
         logging.info('wrote points successfully')
+
+        # clear out env_data list after its been written to DB
+        env_data = []
         client.close()
+
     except BaseException as e:
         logging.error(e)
 

@@ -8,11 +8,7 @@ import logging
 utc = pytz.timezone('UTC')
 # Sensor should be set to Adafruit_DHT.DHT11,
 # Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
-sensors = dict(
-    A=(Adafruit_DHT.AM2302, 17),
-    # B=(Adafruit_DHT.DHT22, 4),
-    C=(Adafruit_DHT.DHT11, 22),
-)
+from settings import SENSORS
 
 
 def get_temp_humidity():
@@ -35,7 +31,7 @@ def get_temp_humidity():
     """
 
     json_body = []
-    for sensor_id, sensor_config in sensors.items():
+    for sensor_id, sensor_config in SENSORS.items():
         sensor, pin = sensor_config
 
         # Try to grab a sensor reading.  Use the read_retry method which will retry up
