@@ -1,4 +1,7 @@
+import Adafruit_DHT
+
 from local_settings import *
+
 DB_PORT = 8086
 
 # seconds between measurements
