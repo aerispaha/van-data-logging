@@ -1,7 +1,5 @@
 import Adafruit_DHT
 
-from local_settings import *
-
 DB_PORT = 8086
 
 # seconds between measurements
@@ -12,3 +10,5 @@ SENSORS = dict(
     B=(Adafruit_DHT.DHT22, 4),
     C=(Adafruit_DHT.DHT11, 22),
 )
+
+from local_settings import *
