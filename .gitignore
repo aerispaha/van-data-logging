@@ -5,3 +5,4 @@ huey.log
 env/
 .env/
 *.egg-info/
+HueySecrets.h
